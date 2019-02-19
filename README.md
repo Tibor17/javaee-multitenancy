@@ -100,9 +100,9 @@ Finally, the module would become (I added more dependencies for sake of CDI acce
 
     <dependencies>
         <module name="org.hibernate"/>
-		<module name="javax.enterprise.api"/>
+        <module name="javax.enterprise.api"/>
 
-		<module name="javax.api"/>
+        <module name="javax.api"/>
         <module name="javax.annotation.api"/>
         <module name="javax.ejb.api"/>
         <module name="javax.resource.api"/>

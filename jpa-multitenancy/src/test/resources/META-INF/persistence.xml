@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+			 version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence">
+
+	<persistence-unit name="multi-tenancy" transaction-type="JTA">
+		<jta-data-source>java:comp/env/jdbc/JavaEEMTDS</jta-data-source>
+        <!--<properties>
+			<property name="hibernate.multiTenancy" value="SCHEMA"/>
+			<property name="hibernate.tenant_identifier_resolver" value="com.toptal.andrehil.mt.hibernate.SchemaResolver"/>
+			<property name="hibernate.multi_tenant_connection_provider" value="com.toptal.andrehil.mt.hibernate.MultiTenantProvider"/>
+        </properties>-->
+		<class>com.github.tibor17.A</class>
+	</persistence-unit>
+
+</persistence>

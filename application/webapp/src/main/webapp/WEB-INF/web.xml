@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <module-name>webapp</module-name>
+
+    <!-- SECURITY CONSTRAINT: PERMITTED ACCESS -->
+    <security-constraint>
+        <display-name>protected POST</display-name>
+        <web-resource-collection>
+            <web-resource-name>post-cars</web-resource-name>
+            <url-pattern>/rest/api/cars</url-pattern>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>personal-cars</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <!-- SECURITY CONSTRAINT: DENIED ACCESS -->
+    <security-constraint>
+        <display-name>denied TRACE, HEAD, DELETE, PUT, GET, CONNECT, OPTIONS</display-name>
+        <web-resource-collection>
+            <web-resource-name>non-post-cars</web-resource-name>
+            <url-pattern>/rest/api/cars</url-pattern>
+            <http-method-omission>POST</http-method-omission>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>personal-cars</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>CarsApplicationRealm</realm-name>
+    </login-config>
+    <security-role>
+        <role-name>personal-cars</role-name>
+    </security-role>
+</web-app>

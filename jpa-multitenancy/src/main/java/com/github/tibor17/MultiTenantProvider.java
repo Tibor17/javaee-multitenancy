@@ -8,7 +8,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.hibernate.HibernateException;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.hibernate.engine.jdbc.dialect.spi.DatabaseMetaDataDialectResolutionInfoAdapter;
@@ -97,6 +96,7 @@ public class MultiTenantProvider implements MultiTenantConnectionProvider, Servi
 
     @Override
     public void releaseAnyConnection(Connection connection) throws SQLException {
+        RESOLVER.setTenantIdentifier("PUBLIC");
         //connection.setSchema("PUBLIC");
         /*try {
             Dialect dialect = dialectResolver.resolveDialect(new DatabaseMetaDataDialectResolutionInfoAdapter(connection.getMetaData()));

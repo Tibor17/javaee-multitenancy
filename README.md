@@ -1,5 +1,13 @@
 # About this project
 
+This exploratory project which implements multitenancy in:
++ JPA/JTA based on Hibernate Multitenancy
++ JAX-RS based on security (identified user in Basic Auth)
+
+It contains a test where XA transaction (having JAX-RS + JPA + JMS + JTA) attempt to rollback distributed transaction on constraint violation.
+
+Another test attempts to break JAX-RS security on an HTTP request sent for a user with denied security role.
+
 ## How to configure datasources and Hibernate multi-tenancy
 
 ### Start PostgreSQL database
@@ -467,8 +475,13 @@ Press any key to continue . . .
 ```
 
 Let's send the HTTP request `POST /webapp/rest/api/cars HTTP/1.1` with authentication header
-`Authorization: Basic c2NoZW1hMjpzY2hlbWEy` .
-The `POST` method is allowed but the role `trains` is not permitted - see the annotation `@RolesAllowed("personal-cars")`.
+
+`Authorization: Basic c2NoZW1hMjpzY2hlbWEy`
+
+
+The `POST` method is allowed but the role `trains` is not permitted:
+
+`@RolesAllowed("personal-cars")`.
 
 ```
 HTTP/1.1 403 Forbidden
@@ -483,3 +496,69 @@ Date: Tue, 19 Feb 2019 19:17:59 GMT
 
 # FAQ
 
+## What does the developer have to do, to use each solution?
+
+The goal is to do nothing in development environment.
+The developer can still use PUBLIC schema and test or run the application as without any multitenancy.
+
+The situation is different in production. Segregate configuration from
+application. This means Hibernate specifics are encapsulated in a Wildfly
+module as described above. This seems to be very easy but one dirty step
+has to be done so that `SchemaHolderLifecycle` should be dynamically
+linked with WAR archive (use Maven profile `-P production`).
+
+The purpose of `SchemaHolderLifecycle` is to avoid security gap because
+(Java SE) `ThreadLocal` is normally not invalidated when the contexts ends.
+This is achieved by `SchemaHolderLifecycle` and the end of CDI request
+context always sets `ThreadLocal` to `PUBLIC` schema. This security
+improvement is not working with EJB and MDB threads. Typically, every
+JDBC connection which ends together with the end of HTTP request sets
+`PUBLIC` schema in `ThreadLocal` via
+`MultiTenantProvider#releaseAnyConnection(Connection c)` and closes
+the JDBC connection.
+
+Notice that EJB and MDB consumers are not CDI and therefore
+`SchemaHolderLifecycle` is not applicable. This means that huge projects
+and applications should split to smaller modules with limited technology
+stack. Such modules are easily under control in development.
+
+## What is needed to use the solutions in the production system?
+see above.
+
+## What is happening if a tenant is added during runtime of a service?
+All would work without restart.
+
+Another question is about FlyWay. The database has to be setup ahead.
+
+Make sure that `PUBLIC` schema is read-only in your database or the
+schema is empty with no tables. Therefore any writes fail fast.
+
+## How does each solution support distributed transactions?
+
+It acts natural, just like a hardware.
+Nothing to do!
+The application server does for you.
+
+## How does the connection pool handling look like?
+
+See the JBoss CLI configuration of datasource. The connection pool is
+shared across schemas in particular database name:
+
+```
+<xa-pool>
+    <min-pool-size>1</min-pool-size>
+    <max-pool-size>20</max-pool-size>
+</xa-pool>
+```
+
+## What are the major pros and cons for each solution?
+
+Not comparable!
+You cannot use maven artifact `org.springframework:spring-jdbc` and its
+transitive dependencies `org.springframework:spring-beans`,
+`org.springframework:spring-core`, `org.springframework:spring-tx` in
+a typical Java EE application.
+
+The Spring Framework is not CDI/EJB container and has nothing to do with
+EE container. The Spring and EE do not share bean objects and their
+context lifecycle control.

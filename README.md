@@ -1,6 +1,6 @@
 # About this project
 
-This exploratory project which implements multitenancy in:
+This is an exploratory project which implements multitenancy in:
 + JPA/JTA based on Hibernate Multitenancy
 + JAX-RS based on security (identified user in Basic Auth)
 

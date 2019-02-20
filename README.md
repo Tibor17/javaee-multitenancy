@@ -8,6 +8,8 @@ It contains a test where XA transaction (having JAX-RS + JPA + JMS + JTA) attemp
 
 Another test attempts to break JAX-RS security on an HTTP request sent for a user with denied security role.
 
+Platform: `wildfly-14.0.1.Final` or `wildfly-16.0.0.Beta1`
+
 ## How to configure datasources and Hibernate multi-tenancy
 
 ### Start PostgreSQL database

@@ -15,7 +15,7 @@ public class AuthRequestFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
-        String basicAuthUserName = requestContext.getSecurityContext().getUserPrincipal().toString();
+        String basicAuthUserName = requestContext.getSecurityContext().getUserPrincipal().getName();
         LOG.info("basicAuthUserName={}", basicAuthUserName);
         SchemaHolderSingleton.getInstance().setIdentifier(basicAuthUserName);
     }

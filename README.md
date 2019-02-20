@@ -330,7 +330,7 @@ So we send the HTTP request with method `POST`:
 The filter `AuthRequestFilter` handled the Principal from JAX-RS `SecurityContext`.
 The string representation of the `Principal` object is security
 user name, same is tenant and the same is database schema.
-See the logs (`basicAuthUserName=schema1`, and JMS consumer `Hi There!`):
+See the logs (`basicAuthUserName=schema1`, and the message `Hi There!` from JMS consumer):
 
 ```
 18:53:45,401 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 86) WFLYUT0021: Registered web context: '/webapp' for server 'default-server'

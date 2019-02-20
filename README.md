@@ -438,7 +438,34 @@ Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "name"
         ... 119 more
 ```
 
-## Test: Breaking security with denied role
+## Test: Breaking HTTP/REST security with annonymous user (unspecified tenant / database schema)
+
+The annonymous users (those without `Authorization` Header in HTTP Request)
+should not be authorized to access the resource `/webapp/rest/api/cars`.
+The REST servlet in WildFly application server replies with response and
+the HTTP header `WWW-Authenticate` where a required authentication schema
+is obvious:
+
+`WWW-Authenticate: Basic realm="CarsApplicationRealm"`
+
+**HTTP Response:**
+```
+HTTP/1.1 401 Unauthorized
+Expires: 0
+Connection: keep-alive
+WWW-Authenticate: Basic realm="CarsApplicationRealm"
+Cache-Control: no-cache, no-store, must-revalidate
+Pragma: no-cache
+Content-Type: text/html;charset=UTF-8
+Content-Length: 71
+Date: Wed, 20 Feb 2019 12:47:02 GMT
+```
+
+**HTTP Request without `Authorization` header:**
+![IntelliJ IDEA REST Client](intellij-idea-rest-client-annonymous.png)
+
+
+## Test: Breaking HTTP/REST security with denied role
 
 Let's create the application user `schema2` and role `trains`.
 

@@ -1,0 +1,12 @@
+
+# http.lowSpeedLimit
+# http.lowSpeedTime
+# If the HTTP transfer speed is less than http.lowSpeedLimit for longer than http.lowSpeedTime seconds, the transfer is aborted.
+# Can be overridden by the GIT_HTTP_LOW_SPEED_LIMIT and GIT_HTTP_LOW_SPEED_TIME environment variables.
+
+# lowSpeedLimit is 1 KB
+# lowSpeedTime is 10 minutes
+
+[http]
+lowSpeedLimit=1024
+lowSpeedTime=600

@@ -1,0 +1,55 @@
+# Auto detect text files and perform LF normalization
+* text eol=lf
+
+
+.editorconfig  text
+.gitignore     text
+.gitattributes text
+*.sql          text
+*.tag          text
+*.ddl          text
+*.puml         text
+*.dtd          text
+*.xsd          text
+*.yml          text
+*.xsl          text
+*.xml          text diff=xml
+*.java         text diff=java
+*.htm          text diff=html
+*.html         text diff=html
+*.js           text diff=javascript
+*.jsf          text
+*.json         text
+*.log          text
+*.txt          text
+*.asciidoc     text
+*.vm           text
+*.fml          text
+*.markdown     text
+*.md           text
+*.css          text
+*.sql          text
+*.properties   text
+*.pl           text diff=perl
+*.pm           text diff=perl
+*.py           text diff=pyton
+*.rb           text diff=ruby
+*.sh           text
+*.bat          text eol=crlf
+
+
+*.doc          binary
+*.docx         binary
+*.ppt          binary
+*.pptx         binary
+*.xls          binary
+*.pdf          binary
+*.gif          binary
+*.jpg          binary
+*.jpeg         binary
+*.png          binary
+*.ttf          binary
+*.ico          binary
+*.svg          binary
+*.swg          binary
+*.bmp          binary

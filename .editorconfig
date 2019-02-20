@@ -1,0 +1,28 @@
+# Configuration file for EditorConfig: http://editorconfig.org
+root = true
+
+[*]
+charset=utf-8
+i18n.logoutputencoding=UTF-8
+i18n.commitencoding=UTF-8
+gui.encoding=utf-8
+end_of_line=lf
+core.autocrlf=input
+color.diff=auto
+core.quotepath=off
+indent_style=space
+indent_size=4
+insert_final_newline=false
+trim_trailing_whitespace=false
+
+[*.properties]
+charset=latin1
+
+[*_en.properties]
+charset=ISO-8859-1
+
+[*_de.properties]
+charset=ISO-8859-1
+
+[*_sk.properties]
+charset=ISO-8859-2

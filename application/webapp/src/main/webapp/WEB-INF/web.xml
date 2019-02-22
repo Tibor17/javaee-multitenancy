@@ -16,9 +16,6 @@
         <auth-constraint>
             <role-name>personal-cars</role-name>
         </auth-constraint>
-        <user-data-constraint>
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
     </security-constraint>
     <login-config>
         <auth-method>BASIC</auth-method>
@@ -30,4 +27,30 @@
     <session-config>
         <tracking-mode>SSL</tracking-mode>
     </session-config>
+    
+    <!--Errors for web servlets.
+    <error-page>
+        <error-code>400</error-code>
+        <location>/error-400.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>401</error-code>
+        <location>/error-401.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error-403.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error-404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error-500.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error.jsp</location>
+    </error-page>-->
 </web-app>

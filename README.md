@@ -299,18 +299,6 @@ It is important to notice that security constraints should be applied in the `we
             <role-name>personal-cars</role-name>
         </auth-constraint>
     </security-constraint>
-    <!-- SECURITY CONSTRAINT: DENIED ACCESS -->
-    <security-constraint>
-        <display-name>denied TRACE, HEAD, DELETE, PUT, GET, CONNECT, OPTIONS</display-name>
-        <web-resource-collection>
-            <web-resource-name>non-post-cars</web-resource-name>
-            <url-pattern>/rest/api/cars</url-pattern>
-            <http-method-omission>POST</http-method-omission>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>personal-cars</role-name>
-        </auth-constraint>
-    </security-constraint>
     <login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>CarsApplicationRealm</realm-name>
@@ -318,6 +306,9 @@ It is important to notice that security constraints should be applied in the `we
     <security-role>
         <role-name>personal-cars</role-name>
     </security-role>
+    <session-config>
+        <tracking-mode>SSL</tracking-mode>
+    </session-config>
 </web-app>
 ```
 
